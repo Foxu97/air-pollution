@@ -9,8 +9,8 @@
       </mat-autocomplete>
     </mat-form-field>
 
-    <span class="radio-label">Air pollution by: </span>
-    <mat-button-toggle-group name="parameters" value="pm25">
+    <span class="radio-label">Show air pollution by: </span>
+    <mat-button-toggle-group name="parameters" #group="matButtonToggleGroup" [value]="defaultParameter" (change)="onValChange(group.value)">
         <mat-button-toggle *ngFor="let parameter of airPollutionParameters" [value]="parameter">{{parameter}}</mat-button-toggle>
       </mat-button-toggle-group>
   </mat-card-content>

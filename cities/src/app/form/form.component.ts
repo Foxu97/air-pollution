@@ -11,17 +11,20 @@ import { CityService } from '../Services/city.service';
 })
 export class FormComponent implements OnInit {
   citiesControl = new FormControl();
+  parameterControl = new FormControl();
   //cities: string[] = ['Poland', 'Germany', 'Spain', 'France'];
   cities = [{name: "Poland", val: "PL"},{name: "Germany", val: "GR"},{name: "Spain", val: "ESP"},{name: "France", val: "FR"}];
   airPollutionParameters: string[] = ["pm25", "pm10", "so2", "no2", "o3", "co", "bc"]
   options: string[] = []
   filteredOptions: Observable<string[]>;
+  public defaultParameter: string;
   
   constructor(
     private _CityService: CityService
   ) { }
 
   ngOnInit() {
+    this.defaultParameter = "pm25";
     this.cities.forEach(city => {
       this.options.push(city.name);
     });
@@ -41,7 +44,12 @@ export class FormComponent implements OnInit {
       if (city.name === selectedCountry){
         this._CityService.getCities();
       }
-    })
-  } 
+    });
+  }
+
+  public onValChange(val: string) {
+    this.defaultParameter = val;
+    console.log(val)
+  }
 
 }

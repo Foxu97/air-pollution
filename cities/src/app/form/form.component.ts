@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CityService } from '../Services/city.service';
+import { LoaderComponent } from '../loader/loader.component'
 
 @Component({
   selector: 'app-form',
@@ -20,6 +21,7 @@ export class FormComponent implements OnInit {
   public defaultParameter: string;
   public selectedCountry: string;
   public mostPollutedCities;
+  public isLoading: boolean;
   
   constructor(
     private _CityService: CityService
@@ -43,21 +45,25 @@ export class FormComponent implements OnInit {
   }
 
   public selectCountry(selectedCountry) {
+    this.isLoading = true;
     this.cities.forEach((city) => {
       if (city.name === selectedCountry){
         this.selectedCountry = city.val;
         this._CityService.getMeasurements(city.val, this.defaultParameter).then(resp => {
           this.mostPollutedCities = resp;
           console.log(this.mostPollutedCities)
+          this.isLoading = false;
         });
       }
     });
   }
 
   public onParamChange(param: string) {
+    this.isLoading = true;
     this.defaultParameter = param;
     this._CityService.getMeasurements(this.selectedCountry, this.defaultParameter).then(resp => {
       this.mostPollutedCities = resp;
+      this.isLoading = false;
       console.log(this.mostPollutedCities)
     });
   }

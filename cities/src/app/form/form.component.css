@@ -18,6 +18,9 @@ mat-accordion{
 }
 .response-card{
     position:relative;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 .response-content{
     display: flex;

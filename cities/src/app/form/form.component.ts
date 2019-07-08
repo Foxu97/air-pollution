@@ -19,7 +19,7 @@ export class FormComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   public defaultParameter: string;
   public selectedCountry: string;
-  public mostPollutedCities: string[];
+  public mostPollutedCities;
   
   constructor(
     private _CityService: CityService
@@ -46,14 +46,19 @@ export class FormComponent implements OnInit {
     this.cities.forEach((city) => {
       if (city.name === selectedCountry){
         this.selectedCountry = city.val;
-        this._CityService.getMeasurements(city.val, this.defaultParameter);
+        this._CityService.getMeasurements(city.val, this.defaultParameter).then(resp => {
+          this.mostPollutedCities = resp;
+          console.log(this.mostPollutedCities)
+        });
       }
     });
   }
 
   public onParamChange(param: string) {
     this.defaultParameter = param;
-    this._CityService.getMeasurements(this.selectedCountry, this.defaultParameter);
+    this._CityService.getMeasurements(this.selectedCountry, this.defaultParameter).then(resp => {
+      this.mostPollutedCities = resp;
+      console.log(this.mostPollutedCities)
+    });
   }
-
 }

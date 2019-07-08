@@ -9,7 +9,18 @@ mat-card-content{
     display: flex;
     align-items: baseline;
 }
+mat-accordion{
+    width: 100%;
+}
 .radio-label{
     margin-left:auto;
     padding-right: 1.2rem;
+}
+.response-card{
+    position:relative;
+}
+.response-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

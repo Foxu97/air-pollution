@@ -19,6 +19,7 @@ export class FormComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   public defaultParameter: string;
   public selectedCountry: string;
+  public mostPollutedCities: string[];
   
   constructor(
     private _CityService: CityService

@@ -13,5 +13,23 @@
     <mat-button-toggle-group name="parameters" #group="matButtonToggleGroup" [value]="defaultParameter" (change)="onParamChange(group.value)" [disabled]="!this.selectedCountry">
         <mat-button-toggle *ngFor="let parameter of airPollutionParameters" [value]="parameter">{{parameter}}</mat-button-toggle>
       </mat-button-toggle-group>
+    </mat-card-content>
+    <mat-card class="response-card">
+      <mat-card-title>The highest measures were noted in:</mat-card-title>
+  <mat-card-content class="response-content">
+      <mat-accordion>
+
+          <mat-expansion-panel *ngFor="let city of mostPollutedCities">
+            <mat-expansion-panel-header>
+              This is the expansion 1 title
+            </mat-expansion-panel-header>
+        
+            This the expansion 1 content
+        
+          </mat-expansion-panel>
+  
+        
+      </mat-accordion>
   </mat-card-content>
+</mat-card>
 </mat-card>

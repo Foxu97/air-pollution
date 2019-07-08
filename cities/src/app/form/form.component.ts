@@ -13,11 +13,12 @@ export class FormComponent implements OnInit {
   citiesControl = new FormControl();
   parameterControl = new FormControl();
   //cities: string[] = ['Poland', 'Germany', 'Spain', 'France'];
-  cities = [{name: "Poland", val: "PL"},{name: "Germany", val: "GR"},{name: "Spain", val: "ESP"},{name: "France", val: "FR"}];
+  cities = [{name: "Poland", val: "PL"},{name: "Germany", val: "DE"},{name: "Spain", val: "ES"},{name: "France", val: "FR"}];
   airPollutionParameters: string[] = ["pm25", "pm10", "so2", "no2", "o3", "co", "bc"]
   options: string[] = []
   filteredOptions: Observable<string[]>;
   public defaultParameter: string;
+  public selectedCountry: string;
   
   constructor(
     private _CityService: CityService
@@ -39,17 +40,19 @@ export class FormComponent implements OnInit {
     const filterValue = value.toLowerCase(); 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+
   public selectCountry(selectedCountry) {
     this.cities.forEach((city) => {
       if (city.name === selectedCountry){
-        this._CityService.getCities();
+        this.selectedCountry = city.val;
+        this._CityService.getMeasurements(city.val, this.defaultParameter);
       }
     });
   }
 
-  public onValChange(val: string) {
-    this.defaultParameter = val;
-    console.log(val)
+  public onParamChange(param: string) {
+    this.defaultParameter = param;
+    this._CityService.getMeasurements(this.selectedCountry, this.defaultParameter);
   }
 
 }

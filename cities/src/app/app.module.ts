@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './form/form.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiAdresses } from './Models/ApiAdresses';
+import { ApiAddresses } from './Models/ApiAddresses';
 
 @NgModule({
   declarations: [
@@ -19,13 +19,12 @@ import { ApiAdresses } from './Models/ApiAdresses';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    // ApiAdresses,
     FormsModule,
     ReactiveFormsModule,
     materialModule,
     BrowserAnimationsModule
   ],
-  providers: [ApiAdresses],
+  providers: [ApiAddresses],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

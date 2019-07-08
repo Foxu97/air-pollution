@@ -5,3 +5,11 @@ mat-card{
     margin-right: 10%;
     top: 10%;
 }
+mat-card-content{
+    display: flex;
+    align-items: baseline;
+}
+.radio-label{
+    margin-left:auto;
+    padding-right: 1.2rem;
+}

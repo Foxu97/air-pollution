@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './form/form.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiAddresses } from './Models/ApiAddresses';
+import { Endpoints } from './Models/Endpoints.model';
 import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { LoaderComponent } from './loader/loader.component';
     materialModule,
     BrowserAnimationsModule
   ],
-  providers: [ApiAddresses],
+  providers: [Endpoints],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

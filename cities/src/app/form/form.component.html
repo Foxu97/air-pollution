@@ -21,11 +21,14 @@
       <mat-accordion>
 
           <mat-expansion-panel *ngFor="let city of mostPollutedCities; let i = index;">
-            <mat-expansion-panel-header>
-              {{i+1}} {{city}}
+            <mat-expansion-panel-header (click)="getCityDescription(city.name)">
+              {{i+1}} {{city.name}} {{city.pollutionLevel}}
             </mat-expansion-panel-header>
-        
-            This the expansion 1 content
+            <div class="city-description-block">
+              <img src={{city.img}} class="city-image"/>
+              <div class="description">{{city.description}}</div>
+
+            </div>
         
           </mat-expansion-panel>
   

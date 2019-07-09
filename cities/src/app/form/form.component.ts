@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CityService } from '../Services/city.service';
-import { LoaderComponent } from '../loader/loader.component'
 
 @Component({
   selector: 'app-form',
@@ -51,7 +50,7 @@ export class FormComponent implements OnInit {
         this.selectedCountry = city.val;
         this._CityService.getMeasurements(city.val, this.defaultParameter).then(resp => {
           this.mostPollutedCities = resp;
-          console.log(this.mostPollutedCities)
+          console.log(this.mostPollutedCities);
           this.isLoading = false;
         });
       }
@@ -66,5 +65,19 @@ export class FormComponent implements OnInit {
       this.isLoading = false;
       console.log(this.mostPollutedCities)
     });
+  }
+  public getCityDescription(cityName){
+    console.log(cityName)
+    this._CityService.getCityDescription(cityName).then((res:any) => {
+      this.mostPollutedCities.find(c => {
+        if (c.name === cityName){
+          c.description = res.extract;
+          c.img = res.thumbnail.source;
+          console.log(res)
+          console.log(this.mostPollutedCities)
+        }
+      })
+    }
+    )
   }
 }

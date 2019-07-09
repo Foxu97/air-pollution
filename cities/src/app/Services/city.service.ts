@@ -1,68 +1,91 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { ApiAddresses } from '../Models/ApiAddresses';
-class apiRes {
-  meta: {
-    name: string,
-    license: string, 
-    website: string,
-    page: number,
-    limit: number,
-    found: number
-  };
-  results: [
-    {
-    location: string,
-    parameter: string,
-    date: {
-            utc: string,
-            local: string
-            },
-    value: number,
-    unit: string,
-    coordinates: {
-                latitude: number,
-                longitude: number
-            },
-    country: string,
-    city: string
-          }
-          ]
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Endpoints } from '../Models/Endpoints.model';
+import { Measurements } from '../Models/Measurements.model';
+import { City } from '../Models/City.model';
+class wikiRes{
+  batchcomplete: string
+  query : { 
+    pages: Object
+  }
+  warnings: Object
 }
 @Injectable({
   providedIn: 'root'
 })
 export class CityService {
-  private _numberOfReturnedCities;
   constructor(
     private _http: HttpClient,
-    private _ApiAddresses: ApiAddresses,
+    private _Endpoints: Endpoints,
   ) { }
 
   public getMeasurements(country: string, parameter: string) {
     return new Promise((resolve, reject) => {
-      let basicApiUrl = this._ApiAddresses.getMeasurementsUrl();
-      this._numberOfReturnedCities = 10;
-      console.log(basicApiUrl)
-      console.log(country)
-      console.log(parameter)
-      let mostPollutedCities: string[] = [];
+      const measurementsEndpoint = this._Endpoints.getMeasurementsEndpoint();
+      const numberOfReturnedCities = 10;
+      const offset = new Date().getTimezoneOffset() * 60000;
+      const yesterday = new Date(Date.now() - 86400000 - offset)
+      .toISOString()
+      .slice(0, -5);
+
       let params = new HttpParams();
       params = params.append('country', country);
-      //params = params.append('limit', '50');
       params = params.append('sort', 'desc');
       params = params.append('parameter', parameter);
       params = params.append('order_by', 'value');
-      this._http.get(basicApiUrl, {params: params}).subscribe((res: apiRes ) => {
-        res.results.forEach((city) => {
-          if(!mostPollutedCities.includes(city.city) && mostPollutedCities.length != this._numberOfReturnedCities){
-            mostPollutedCities.push(city.city);
+      params = params.append('limit', '500');
+      params = params.append('date_from', yesterday);
+      this._http.get(measurementsEndpoint, {params: params}).subscribe((res: Measurements ) => {
+        const mostPollutedCities = [];
+        for (let i = 0; mostPollutedCities.length < numberOfReturnedCities; i++){
+          const city = new City();
+          city.name = res.results[i].city;
+          city.pollutionLevel = res.results[i].value;
+          if (mostPollutedCities.length === 0){
+            mostPollutedCities.push(city)
           }
-        });
+          else{
+            let isCityAlreadyAdded = mostPollutedCities.find(c => {
+              return c.name === res.results[i].city
+            })
+            if(isCityAlreadyAdded){
+              continue;
+            }
+            else {
+              mostPollutedCities.push(city)
+            }
+          }
+        }
       resolve(mostPollutedCities);
       });
+    }); 
+  }
 
-    })
-    
+  public getCityDescription(cityName){
+    return new Promise((resolve, reject) => {
+      const wikiEndpoint = this._Endpoints.getWikiEndpoint();
+      let params = new HttpParams();
+      params = params.append('action', 'query');
+      params = params.append('format', 'json');
+      params = params.append('prop', 'extracts|info|pageimages|description');
+      params = params.append('inpop', 'url');
+      params = params.append('piprop', 'thumbnail');
+      params = params.append('pithumbsize', '300');
+      params = params.append('exchars', '500');
+      params = params.append('exsectionformat', 'plain');
+      params = params.append('redirects', '1');
+      params = params.append('origin', '*');
+      params = params.append('exintro', '');
+      params = params.append('explaintext', '');
+      params = params.append('titles', cityName);
+      this._http.get(wikiEndpoint, {params: params}).subscribe((res: wikiRes)=>{
+        console.log(res)
+        let pages = res.query.pages;
+        let page = pages[Object.keys(pages)[0]];
+        console.log(page)
+        resolve(page);
+
+      });
+    });
   }
 }

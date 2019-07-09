@@ -27,3 +27,18 @@ mat-accordion{
     flex-direction: column;
     align-items: center;
 }
+.city-image{
+    border-radius: 10%;
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+}
+.city-description-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.description{
+    padding-left: 2rem;
+    box-sizing: border-box;
+}

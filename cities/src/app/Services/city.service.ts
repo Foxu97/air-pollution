@@ -35,10 +35,16 @@ export class CityService {
       params = params.append('order_by', 'value');
       params = params.append('limit', '500');
       params = params.append('date_from', yesterday);
+      const mostPollutedCities = [];
       this._http.get(measurementsEndpoint, {params: params}).subscribe((res: Measurements ) => {
-        const mostPollutedCities = [];
+        console.log(res)
         for (let i = 0; mostPollutedCities.length < numberOfReturnedCities; i++){
+          if(i === res.results.length){
+            break;
+          }
           const city = new City();
+          console.log(i)
+          console.log(mostPollutedCities.length)
           city.name = res.results[i].city;
           city.pollutionLevel = res.results[i].value;
           if (mostPollutedCities.length === 0){

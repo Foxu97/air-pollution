@@ -1,0 +1,93 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$air-primary: (
+    50 : #e2effa,
+    100 : #b6d6f2,
+    200 : #85bbea,
+    300 : #54a0e2,
+    400 : #2f8bdb,
+    500 : #0a77d5,
+    600 : #096fd0,
+    700 : #0764ca,
+    800 : #055ac4,
+    900 : #0347ba,
+    A100 : #e3ecff,
+    A200 : #b0c9ff,
+    A400 : #7da5ff,
+    A700 : #6394ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+)
+  );
+  $air-accent: (
+    50 : #e8e3eb,
+    100 : #c5bace,
+    200 : #9e8cad,
+    300 : #775e8c,
+    400 : #5a3c74,
+    500 : #3d195b,
+    600 : #371653,
+    700 : #2f1249,
+    800 : #270e40,
+    900 : #1a082f,
+    A100 : #a569ff,
+    A200 : #8736ff,
+    A400 : #6803ff,
+    A700 : #5d00e9,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+$air-primary: mat-palette($air-primary);
+$air-accent: mat-palette($air-accent);
+
+// The warn palette is optional (defaults to red).
+
+// Create the theme object (a Sass map containing all of the palettes).
+$air-theme: mat-light-theme($air-primary, $air-accent);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($air-theme);
+
+
+

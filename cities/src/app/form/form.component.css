@@ -1,9 +1,11 @@
 mat-card{
-    width:80%;
+    width: 50%;
     position: absolute;
-    margin-left:10%;
-    margin-right: 10%;
-    top: 10%;
+    margin-left: 25%;
+    margin-right: 25%;
+    top: 5%;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2rem;
 }
 mat-card-content{
     display: flex;
@@ -13,8 +15,9 @@ mat-accordion{
     width: 100%;
 }
 .radio-label{
-    margin-left:auto;
-    padding-right: 1.2rem;
+    text-align: center;
+    color: #d0e4f7;
+    text-shadow: 2px 2px #0a77d5;
 }
 .response-card{
     position:relative;
@@ -37,8 +40,52 @@ mat-accordion{
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top:1rem;
 }
 .description{
-    padding-left: 2rem;
+    padding-left: 1.5rem;
     box-sizing: border-box;
+    width: calc(100% - 10rem);
+}
+mat-card-header{
+    justify-content: center;
+    padding: 2rem;
+}
+.mat-card-header .mat-card-title{
+    font-size: 2rem;
+    margin-left: auto;
+    margin-right:auto;
+}
+.mat-h1{
+    font-size:3rem;
+    color: #d0e4f7;
+    text-shadow: 2px 2px #0a77d5;
+}
+mat-expansion-panel-header{
+    background: #d0e4f7 !important;  /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #d0e4f7 0%, #87bcea 100%) !important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #d0e4f7 0%,#87bcea 100%) !important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #d0e4f7 0%,#87bcea 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.mat-accordion .mat-expansion-panel:first-of-type {
+    border-top-right-radius: 2rem;
+    border-top-left-radius: 2rem;
+}
+.mat-accordion .mat-expansion-panel:last-of-type {
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.inputs-block{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+mat-spinner{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }

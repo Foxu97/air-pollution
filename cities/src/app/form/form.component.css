@@ -11,7 +11,6 @@ mat-card {
 }
 mat-card-content {
   display: flex;
-  padding-bottom: 2rem;
 }
 mat-accordion {
   width: 100%;
@@ -132,6 +131,7 @@ mat-expansion-panel-header:hover {
   margin-right: auto;
   align-items: center;
   width: 98%;
+  padding-bottom: 1rem;
 }
 mat-spinner {
   margin-left: auto;
@@ -180,4 +180,20 @@ mat-spinner {
     padding: 1rem 0 0 0;
     width: 100%;
   }
+  .city-image{
+    width: 22rem;
 }
+}
+
+@media only screen and (max-width: 480px) {
+    .mat-button-toggle-group{
+        flex-direction: column;
+    }
+    .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle{
+        border-left: none;
+    }
+    .mat-button-toggle{
+        border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+    }
+    
+  }

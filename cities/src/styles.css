@@ -30,7 +30,7 @@ mat-expansion-panel .mat-expansion-panel-body {
     color: #d0e4f7 !important;
 }
 .mat-input-element{
-    color: #d0e4f7 !important;
+    color: #0a77d5 !important;
 }
 .mat-input-placeholder {
     color: #d0e4f7 !important;
@@ -41,3 +41,6 @@ mat-expansion-panel .mat-expansion-panel-body {
 .mat-form-field-label {
     color: #d0e4f7 !important;
   }
+.mat-button-toggle-disabled{
+    cursor: not-allowed !important;
+}

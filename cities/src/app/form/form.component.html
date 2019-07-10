@@ -26,6 +26,8 @@
       </mat-button-toggle-group>
     </div>
   </mat-card-content>
+  <mat-divider></mat-divider>
+  <h3 class="no-measurements-error" *ngIf="!this.isMeasurements">No measurements fetched!</h3>
   <mat-accordion *ngIf="mostPollutedCities">
 
     <mat-expansion-panel *ngFor="let city of mostPollutedCities; let i = index;">
@@ -34,8 +36,8 @@
       </mat-expansion-panel-header>
       <mat-spinner *ngIf="!city.description"></mat-spinner>
       <div class="city-description-block" *ngIf="city.description">
-        <img src={{city.img}} class="city-image" />
-        <div class="description">{{city.description}}</div>
+        <img src={{city.img}} class="city-image" alt={{city.name}}/>
+        <div class="description"><p>{{city.description}} </p><a href={{city.fullurl}} target="_blank" *ngIf="city.fullurl">Read more</a>  </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

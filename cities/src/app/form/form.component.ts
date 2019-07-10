@@ -10,23 +10,24 @@ import { CityService } from '../Services/city.service';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  citiesControl = new FormControl();
-  parameterControl = new FormControl();
-  //cities: string[] = ['Poland', 'Germany', 'Spain', 'France'];
-  cities = [{name: "Poland", val: "PL"},{name: "Germany", val: "DE"},{name: "Spain", val: "ES"},{name: "France", val: "FR"}];
-  airPollutionParameters: string[] = ["pm25", "pm10", "so2", "no2", "o3", "co", "bc"]
-  options: string[] = []
-  filteredOptions: Observable<string[]>;
+  public citiesControl = new FormControl();
+  public parameterControl = new FormControl();
+  public cities = [{ name: "Poland", val: "PL" }, { name: "Germany", val: "DE" }, { name: "Spain", val: "ES" }, { name: "France", val: "FR" }];
+  public airPollutionParameters: string[] = ["pm25", "pm10", "so2", "no2", "o3", "co", "bc"]
+  public options: string[] = []
+  public filteredOptions: Observable<string[]>;
   public defaultParameter: string;
   public selectedCountry: string;
   public mostPollutedCities;
   public isLoading: boolean;
-  
+  public isMeasurements: boolean;
+
   constructor(
     private _CityService: CityService
   ) { }
 
   ngOnInit() {
+    this.isMeasurements = true;
     this.defaultParameter = "pm25";
     this.cities.forEach(city => {
       this.options.push(city.name);
@@ -39,45 +40,51 @@ export class FormComponent implements OnInit {
       );
   }
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase(); 
+    const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   public selectCountry(selectedCountry) {
     this.isLoading = true;
+    this.mostPollutedCities = [];
     this.cities.forEach((city) => {
-      if (city.name === selectedCountry){
+      if (city.name === selectedCountry) {
         this.selectedCountry = city.val;
         this._CityService.getMeasurements(city.val, this.defaultParameter).then(resp => {
           this.mostPollutedCities = resp;
-          console.log(this.mostPollutedCities);
           this.isLoading = false;
-        });
+          this.isMeasurements = true;
+        }).catch(()=>{
+          this.isMeasurements = false;
+          this.isLoading = false;
+        })
       }
     });
   }
 
   public onParamChange(param: string) {
     this.isLoading = true;
+    this.mostPollutedCities = [];
     this.defaultParameter = param;
     this._CityService.getMeasurements(this.selectedCountry, this.defaultParameter).then(resp => {
       this.mostPollutedCities = resp;
       this.isLoading = false;
-      console.log(this.mostPollutedCities)
-    });
+      this.isMeasurements = true;
+    }).catch(()=>{
+      this.isMeasurements = false;
+      this.isLoading = false;
+    })
   }
-  public getCityDescription(cityName){
-    console.log(cityName)
-    this._CityService.getCityDescription(cityName).then((res:any) => {
+  public getCityDescription(cityName) {
+    this._CityService.getCityDescription(cityName).then((res: any) => {
       this.mostPollutedCities.find(c => {
-        if (c.name === cityName){
+        if (c.name === cityName) {
           c.description = res.extract;
           c.img = res.thumbnail.source;
-          console.log(res)
-          console.log(this.mostPollutedCities)
+          c.fullurl = res.fullurl;
         }
-      })
+      });
     }
-    )
+    );
   }
 }

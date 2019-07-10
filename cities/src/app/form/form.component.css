@@ -36,6 +36,7 @@ mat-accordion {
   width: 12rem;
   object-fit: cover;
   border: 0.2rem solid #d0e4f7;
+  box-sizing: border-box;
 }
 .city-description-block {
   display: flex;
@@ -46,7 +47,7 @@ mat-accordion {
 .description {
   padding-left: 1.5rem;
   box-sizing: border-box;
-  width: calc(100% - 10rem);
+  width: calc(100% - 12rem);
 }
 mat-card-header {
   justify-content: center;
@@ -66,6 +67,12 @@ mat-card-header {
   width: 90%;
   display: flex;
   justify-content: space-between;
+}
+.no-measurements-error{
+  font-size: 1.8rem;
+  color: #d0e4f7;
+  padding:1rem 1rem 0 1rem;
+  text-align:center;
 }
 .city-name {
   width: 70%;
@@ -154,7 +161,14 @@ mat-spinner {
 
   cursor: not-allowed !important;
 }
-
+a:link{
+    text-decoration: none;
+    display: block;
+    text-align: right;
+}
+a:active{
+    color:#0a77d5
+}
 @media only screen and (max-width: 1200px) {
   mat-card {
     width: 70%;

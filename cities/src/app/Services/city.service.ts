@@ -37,6 +37,10 @@ export class CityService {
       params = params.append('date_from', yesterday);
       const mostPollutedCities = [];
       this._http.get(measurementsEndpoint, {params: params}).subscribe((res: Measurements ) => {
+        if(!res.results.length){
+          reject("No measurements!")
+        }
+        else {
         for (let i = 0; mostPollutedCities.length < numberOfReturnedCities; i++){
           if(i === res.results.length -1){
             break;
@@ -60,6 +64,7 @@ export class CityService {
           }
         }
       resolve(mostPollutedCities);
+      }
       });
     }); 
   }
@@ -70,20 +75,20 @@ export class CityService {
       let params = new HttpParams();
       params = params.append('action', 'query');
       params = params.append('format', 'json');
+      params = params.append('formatversion', '2');
       params = params.append('prop', 'extracts|info|pageimages|description');
-      params = params.append('inpop', 'url');
+      params = params.append('inprop', 'url');
       params = params.append('piprop', 'thumbnail');
-      params = params.append('pithumbsize', '300');
-      params = params.append('exchars', '500');
+      params = params.append('pithumbsize', '400');
+      params = params.append('exchars', '350');
       params = params.append('exsectionformat', 'plain');
-      params = params.append('redirects', '1');
+      params = params.append('redirects', "1");
       params = params.append('origin', '*');
       params = params.append('exintro', '');
       params = params.append('explaintext', '');
       params = params.append('titles', cityName);
       this._http.get(wikiEndpoint, {params: params}).subscribe((res: wikiRes)=>{
-        let pages = res.query.pages;
-        let page = pages[Object.keys(pages)[0]];
+        let page = res.query.pages[0];
         resolve(page);
       });
     });

@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    box-sizing: border-box;
+}
 
 html, body { 
-    height: 100%;
+    min-height: 100vh;
     background: #d0e4f7; /* Old browsers */
     background: -moz-linear-gradient(-45deg, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(-45deg, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Chrome10-25,Safari5.1-6 */
@@ -10,7 +13,11 @@ html, body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    width: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    }
 mat-expansion-panel .mat-expansion-panel-body {
     background: #54a0e2 !important;  /* Old browsers */
     background: -moz-linear-gradient(-45deg, #54a0e2 0%, #87bcea 100%) !important; /* FF3.6-15 */

@@ -1,6 +1,6 @@
 export class City {
     name: string
-    pollutionLevel: number
+    pollutionLevel: string
     description: string
     img: string
 }

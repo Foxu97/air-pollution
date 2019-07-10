@@ -37,16 +37,14 @@ export class CityService {
       params = params.append('date_from', yesterday);
       const mostPollutedCities = [];
       this._http.get(measurementsEndpoint, {params: params}).subscribe((res: Measurements ) => {
-        console.log(res)
         for (let i = 0; mostPollutedCities.length < numberOfReturnedCities; i++){
-          if(i === res.results.length){
+          if(i === res.results.length -1){
             break;
           }
           const city = new City();
-          console.log(i)
-          console.log(mostPollutedCities.length)
           city.name = res.results[i].city;
-          city.pollutionLevel = res.results[i].value;
+          city.pollutionLevel = (res.results[i].value).toFixed(2);
+          console.log (city.pollutionLevel);
           if (mostPollutedCities.length === 0){
             mostPollutedCities.push(city)
           }
@@ -85,12 +83,9 @@ export class CityService {
       params = params.append('explaintext', '');
       params = params.append('titles', cityName);
       this._http.get(wikiEndpoint, {params: params}).subscribe((res: wikiRes)=>{
-        console.log(res)
         let pages = res.query.pages;
         let page = pages[Object.keys(pages)[0]];
-        console.log(page)
         resolve(page);
-
       });
     });
   }

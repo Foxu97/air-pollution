@@ -8,7 +8,7 @@
   </mat-card-header>
   <mat-card-content>
     <div class="inputs-block">
-      <mat-form-field appearance="outline">
+      <mat-form-field class="country-input" appearance="outline">
         <mat-label>Select country</mat-label>
         <input type="text" placeholder="Select country" matInput [formControl]="citiesControl" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
@@ -30,7 +30,7 @@
 
     <mat-expansion-panel *ngFor="let city of mostPollutedCities; let i = index;">
       <mat-expansion-panel-header (click)="getCityDescription(city.name)">
-        <h3>{{i+1}} {{city.name}} {{city.pollutionLevel}} <span class="unit">µg/m³</span></h3>
+        <h3 class="mat-h3"><span class="city-name">{{i+1}}. {{city.name}}</span> <span class="pollution-level">{{city.pollutionLevel}}<span class="unit">µg/m³</span></span></h3>
       </mat-expansion-panel-header>
       <mat-spinner *ngIf="!city.description"></mat-spinner>
       <div class="city-description-block" *ngIf="city.description">

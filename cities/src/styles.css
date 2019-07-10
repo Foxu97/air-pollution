@@ -11,3 +11,26 @@ html, body {
     background-attachment: fixed;
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+mat-expansion-panel .mat-expansion-panel-body {
+    background: #54a0e2 !important;  /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #54a0e2 0%, #87bcea 100%) !important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #54a0e2 0%,#87bcea 100%) !important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #54a0e2 0%,#87bcea 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#54a0e2', endColorstr='#87bcea',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    color: #d0e4f7;
+}
+.mat-expansion-indicator::after{
+    color: #d0e4f7 !important;
+}
+.mat-input-element{
+    color: #d0e4f7 !important;
+}
+.mat-input-placeholder {
+    color: #d0e4f7 !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #d0e4f7 !important
+}
+.mat-form-field-label {
+    color: #d0e4f7 !important;
+  }

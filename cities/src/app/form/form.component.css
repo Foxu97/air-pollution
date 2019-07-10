@@ -180,20 +180,31 @@ mat-spinner {
     padding: 1rem 0 0 0;
     width: 100%;
   }
-  .city-image{
+  .city-image {
     width: 22rem;
-}
+  }
 }
 
 @media only screen and (max-width: 480px) {
-    .mat-button-toggle-group{
-        flex-direction: column;
-    }
-    .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle{
-        border-left: none;
-    }
-    .mat-button-toggle{
-        border-bottom: solid 1px rgba(0, 0, 0, 0.12);
-    }
-    
+  .mat-button-toggle-group {
+    flex-direction: column;
   }
+  .mat-button-toggle-group-appearance-standard
+    .mat-button-toggle
+    + .mat-button-toggle {
+    border-left: none;
+  }
+  .mat-button-toggle {
+    border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+  }
+}
+
+@media only screen and (max-width: 250px) {
+  mat-form-field {
+    width: 90%;
+  }
+  .mat-h1 {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+}

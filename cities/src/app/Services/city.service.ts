@@ -44,7 +44,6 @@ export class CityService {
           const city = new City();
           city.name = res.results[i].city;
           city.pollutionLevel = (res.results[i].value).toFixed(2);
-          console.log (city.pollutionLevel);
           if (mostPollutedCities.length === 0){
             mostPollutedCities.push(city)
           }

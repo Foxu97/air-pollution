@@ -36,7 +36,7 @@ export class FormComponent implements OnInit {
     this.filteredOptions = this.citiesControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(value))
+        map(value => this._filter(value)),
       );
   }
   private _filter(value: string): string[] {
@@ -44,36 +44,32 @@ export class FormComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  public selectCountry(selectedCountry) {
-    this.isLoading = true;
-    this.mostPollutedCities = [];
-    this.cities.forEach((city) => {
-      if (city.name === selectedCountry) {
-        this.selectedCountry = city.val;
-        this._CityService.getMeasurements(city.val, this.defaultParameter).then(resp => {
-          this.mostPollutedCities = resp;
-          this.isLoading = false;
-          this.isMeasurements = true;
-        }).catch(()=>{
-          this.isMeasurements = false;
-          this.isLoading = false;
-        })
-      }
-    });
-  }
+  public selectCountry() {
 
-  public onParamChange(param: string) {
-    this.isLoading = true;
     this.mostPollutedCities = [];
-    this.defaultParameter = param;
-    this._CityService.getMeasurements(this.selectedCountry, this.defaultParameter).then(resp => {
-      this.mostPollutedCities = resp;
-      this.isLoading = false;
-      this.isMeasurements = true;
-    }).catch(()=>{
-      this.isMeasurements = false;
-      this.isLoading = false;
+    let isCityAvailable = this.cities.find((city) => {
+      return ((city.name).toLowerCase() === this.citiesControl.value.trim().toLowerCase())
     })
+    if (isCityAvailable) {
+      this.isLoading = true;
+      this.selectedCountry = isCityAvailable.val;
+      this._CityService.getMeasurements(this.selectedCountry, this.defaultParameter).then(resp => {
+        this.mostPollutedCities = resp;
+        this.isLoading = false;
+        this.isMeasurements = true;
+      }).catch(() => {
+        this.isMeasurements = false;
+        this.isLoading = false;
+      })
+    }
+    else {
+      this.isMeasurements = false;
+    }
+
+
+  }
+  public onParamChange(param: string) {
+    this.defaultParameter = param;
   }
   public getCityDescription(cityName) {
     this._CityService.getCityDescription(cityName).then((res: any) => {
